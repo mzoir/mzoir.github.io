@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Video Stream</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .video-container {
+            width: 80%;
+            max-width: 800px;
+            height: 450px; /* Adjust height as needed */
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+      <iframe src="https://www.ipslow.com/tv/canal.php?id=ssc1" width="640" height="360"  scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
+    <div class="video-container">
+        <iframe id="liveVideo" src="https://live.aflam4you.net/playeraf.php?vid=1010&aflam_s=1&" allowfullscreen></iframe>
+
+    </div>
+     <div class="video-container">
+      <iframe src="https://wgstream.sx/live/zatvf2rki" width="640" height="360"  scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
+    </div>
+</body>
+</html>
