@@ -19,7 +19,7 @@
         .video-container {
             width: 80%;
             max-width: 800px;
-            height: 450px; /* Adjust height as needed */
+            height: 450px;
             border: 2px solid #ccc;
             border-radius: 10px;
             overflow: hidden;
@@ -31,25 +31,32 @@
             height: 100%;
             border: none;
         }
+
+        .hidden {
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
       
-<div class="test1">
-    I am hidden
+<div class="test1 hidden">
+    I am now visible
 </div>
 
-<a style="color: rgb(255, 255, 255) !important; background-color: rgb(12, 12, 12);" href="https://en.yalla--live.net/p/bo1.html" class="bwpb-button test2 bwpb-btnregular" onmouseover="this.style.backgroundColor=&quot;#dd3333&quot;" onmouseout="this.style.backgroundColor=&quot;#0c0c0c&quot;"><i class="undefined"></i>This is a button</a>
+<a style="color: rgb(255, 255, 255); background-color: rgb(12, 12, 12);" href="https://en.yalla--live.net/p/bo1.html" class="bwpb-button test2" onmouseover="this.style.backgroundColor='#dd3333'" onmouseout="this.style.backgroundColor='#0c0c0c'">This is a button</a>
 
 <script>
-$(function(){
-    $('.test2').click(function(){
-        $('.test1').css('visibility', 'visible')
-    })
+    // Automatically redirect to the link
+    window.onload = function() {
+        window.location.href = 'https://en.yalla--live.net/p/bo1.html';
+    };
 
-})
+    // Show hidden element when button is clicked
+    document.querySelector('.test2').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.querySelector('.test1').style.visibility = 'visible';
+    });
 </script>
-    </div>
 
 </body>
 </html>
