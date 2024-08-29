@@ -19,7 +19,7 @@
         .video-container {
             width: 80%;
             max-width: 800px;
-            height: 450px;
+            height: 450px; /* Adjust height as needed */
             border: 2px solid #ccc;
             border-radius: 10px;
             overflow: hidden;
@@ -31,32 +31,16 @@
             height: 100%;
             border: none;
         }
-
-        .hidden {
-            visibility: hidden;
-        }
     </style>
 </head>
 <body>
-      
-<div class="test1 hidden">
-    I am now visible
-</div>
+      <iframe src="https://www.ipslow.com/tv/canal.php?id=ssc1" width="640" height="360"  scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
+    <div class="video-container">
+        <iframe id="liveVideo" src="https://live.aflam4you.net/playeraf.php?vid=1010&aflam_s=1&" allowfullscreen></iframe>
 
-<a style="color: rgb(255, 255, 255); background-color: rgb(12, 12, 12);" href="https://en.yalla--live.net/p/bo1.html" class="bwpb-button test2" onmouseover="this.style.backgroundColor='#dd3333'" onmouseout="this.style.backgroundColor='#0c0c0c'">This is a button</a>
-
-<script>
-    // Automatically redirect to the link
-    window.onload = function() {
-        window.location.href = 'https://en.yalla--live.net/p/bo1.html';
-    };
-
-    // Show hidden element when button is clicked
-    document.querySelector('.test2').addEventListener('click', function(event) {
-        event.preventDefault();
-        document.querySelector('.test1').style.visibility = 'visible';
-    });
-</script>
-
+    </div>
+     <div class="video-container">
+      <iframe src="https://wgstream.sx/live/zatvf2rki" width="640" height="360"  scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
+    </div>
 </body>
 </html>
