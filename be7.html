@@ -33,7 +33,16 @@ video{
 </head>
 
 <body>
+<button onclick="play()">Play</button>
 
+<script>
+function play() {
+  const streamUrl =
+    "http://your-server/video-path";
+
+  window.location.href = streamUrl;
+}
+</script>
 <video id="video" controls autoplay playsinline></video>
 <div id="msg">Loading...</div>
 
