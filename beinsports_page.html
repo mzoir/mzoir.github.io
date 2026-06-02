@@ -1,39 +1,36 @@
 <script>
 
-// FIREBASE PROJECT
-
 const projectId = "plmo-c5ddd";
 const apiKey = "AIzaSyDPxhzmTie_ysPIMyB9Ivix5BHMetyZWxs";
-
-// FIRESTORE DOC
-// change if your credentials are stored elsewhere
 
 const firestoreUrl =
 `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/iptv/config?key=${apiKey}`;
 
+function showError(msg){
+    document.getElementById("loader").style.display="none";
+    document.getElementById("channels").innerHTML =
+        `<p style="color:white;text-align:center">${msg}</p>`;
+}
+
 async function getCredentials(){
 
     try{
-
         const res = await fetch(firestoreUrl);
         const data = await res.json();
 
-        console.log(data);
+        console.log("Firestore:", data);
 
         if(!data.fields){
-            throw "No firestore data";
+            return null;
         }
 
         return {
-            username:
-                data.fields.username.stringValue,
-            password:
-                data.fields.password.stringValue
+            username: data.fields.username.stringValue,
+            password: data.fields.password.stringValue
         };
 
     }catch(e){
-
-        console.log(e);
+        console.log("Firestore error:", e);
         return null;
     }
 }
@@ -42,76 +39,51 @@ async function loadChannels(){
 
     try{
 
-        // GET USERNAME + PASSWORD FROM FIREBASE
-
         const creds = await getCredentials();
 
         if(!creds){
-            throw "Credentials not found";
+            return showError("❌ Firebase credentials not loaded");
         }
 
-        const username = creds.username;
-        const password = creds.password;
-
-        // IPTV API
-
         const url =
-`http://ugeen.live:8080/player_api.php?username=${username}&password=${password}&action=get_live_streams`;
+`http://ugeen.live:8080/player_api.php?username=${creds.username}&password=${creds.password}&action=get_live_streams`;
 
-        console.log(url);
+        console.log("IPTV URL:", url);
 
-        const response =
-            await fetch(url);
+        const response = await fetch(url);
+        const data = await response.json();
 
-        const data =
-            await response.json();
+        if(!Array.isArray(data)){
+            return showError("❌ IPTV API failed");
+        }
 
-        const channels =
-            data.filter(ch =>
-                ch.name &&
-                (
-                    ch.name.toLowerCase().includes("bein sports") ||
-                    ch.name.toLowerCase().includes("bein")
-                )
-            );
+        const channels = data.filter(ch =>
+            ch.name &&
+            ch.name.toLowerCase().includes("bein")
+        );
 
-        document.getElementById(
-            "loader"
-        ).style.display="none";
+        document.getElementById("loader").style.display="none";
 
-        const container =
-            document.getElementById(
-                "channels"
-            );
+        const container = document.getElementById("channels");
 
-        channels.forEach(ch=>{
+        channels.forEach(ch => {
 
-            const card =
-                document.createElement(
-                    "div"
-                );
+            const card = document.createElement("div");
+            card.className = "card";
 
-            card.className="card";
-
-            card.onclick = ()=>{
-
+            card.onclick = () => {
                 window.location.href =
                 `be7.html?stream_id=${ch.stream_id}`;
             };
 
             card.innerHTML = `
 <div class="icon-box">
-${
-ch.stream_icon
+${ch.stream_icon
 ? `<img src="${ch.stream_icon}">`
-: `📺`
-}
+: "📺"}
 </div>
 
-<div class="channel-name">
-${ch.name}
-</div>
-
+<div class="channel-name">${ch.name}</div>
 <div class="play">▶</div>
 `;
 
@@ -119,17 +91,8 @@ ${ch.name}
         });
 
     }catch(e){
-
-        document.getElementById(
-            "loader"
-        ).style.display="none";
-
-        document.getElementById(
-            "channels"
-        ).innerHTML =
-        "<p style='color:white;text-align:center;'>Failed to load channels</p>";
-
-        console.log(e);
+        console.log("Main error:", e);
+        showError("❌ Page crashed (check console)");
     }
 }
 
