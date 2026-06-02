@@ -188,12 +188,10 @@ async function loadChannels(){
 
             const card = document.createElement("div");
             card.className = "card";
-
-            card.onclick = () => {
-                window.location.href =
-                `be7.html?stream_id=${ch.stream_id}`;
-            };
-
+      card.onclick = () => {
+  window.location.href =
+    `https://58.mzliker99.workers.dev/player?stream_id=${ch.stream_id}`;
+};
             card.innerHTML = `
 <div class="icon-box">
 ${ch.stream_icon
