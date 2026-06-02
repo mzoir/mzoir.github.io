@@ -1,3 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bein Sports</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#673AB7;
+}
+
+/* NAVBAR */
+.navbar{
+    background:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 18px;
+    border-bottom-left-radius:30px;
+    border-bottom-right-radius:30px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.navbar .title{
+    font-size:20px;
+    font-weight:bold;
+    color:#673AB7;
+}
+
+.navbar button{
+    border:none;
+    background:none;
+    font-size:20px;
+    cursor:pointer;
+}
+
+/* LOADER */
+.loader{
+    border:5px solid #eee;
+    border-top:5px solid #673AB7;
+    border-radius:50%;
+    width:45px;
+    height:45px;
+    animation:spin 1s linear infinite;
+    margin:50px auto;
+}
+
+@keyframes spin{
+    100%{ transform:rotate(360deg); }
+}
+
+/* CHANNELS */
+.container{
+    padding:12px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:14px;
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+    box-shadow:0 5px 10px rgba(0,0,0,0.08);
+}
+
+.icon-box{
+    width:55px;
+    height:55px;
+    border-radius:14px;
+    overflow:hidden;
+    background:#eee;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.icon-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.channel-name{
+    flex:1;
+    margin-left:12px;
+    font-weight:600;
+}
+
+.play{
+    font-size:24px;
+    color:#673AB7;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <button onclick="history.back()">⬅</button>
+    <div class="title">Bein Sports</div>
+    <button onclick="location.reload()">🔄</button>
+</div>
+
+<!-- LOADER -->
+<div id="loader" class="loader"></div>
+
+<!-- CHANNELS -->
+<div id="channels" class="container"></div>
+
 <script>
 
 const projectId = "plmo-c5ddd";
@@ -99,3 +217,6 @@ ${ch.stream_icon
 loadChannels();
 
 </script>
+
+</body>
+</html>
