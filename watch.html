@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Servers</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#101010;
+}
+
+/* APPBAR */
+
+.appbar{
+    background:white;
+    padding:18px;
+    border-bottom-left-radius:28px;
+    border-bottom-right-radius:28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 8px rgba(0,0,0,.12);
+}
+
+.title{
+    color:#673AB7;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.icon-btn{
+    border:none;
+    background:none;
+    font-size:22px;
+    cursor:pointer;
+}
+
+/* CENTER */
+
+.center{
+    height:calc(100vh - 90px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+/* LOADER */
+
+.loader{
+    border:5px solid #ddd;
+    border-top:5px solid #673AB7;
+    border-radius:50%;
+    width:45px;
+    height:45px;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    100%{
+        transform:rotate(360deg);
+    }
+}
+
+/* BUTTON */
+
+.server-btn{
+    width:220px;
+    padding:18px;
+    border:none;
+    border-radius:16px;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:15px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.server-btn:hover{
+    transform:scale(1.03);
+}
+
+.purple{
+    background:#673AB7;
+}
+
+.blue{
+    background:#2196F3;
+}
+
+.green{
+    background:#4CAF50;
+}
+</style>
+</head>
+
+<body>
+
+<!-- APPBAR -->
+
+<div class="appbar">
+    <button class="icon-btn" onclick="history.back()">⬅</button>
+
+    <div id="title" class="title">
+        Server
+    </div>
+
+    <button class="icon-btn" onclick="location.reload()">🔄</button>
+</div>
+
+<!-- BODY -->
+
+<div id="content" class="center">
+    <div class="loader"></div>
+</div>
+
+<script>
+
+// STREAM ID FROM URL
+
+const params = new URLSearchParams(window.location.search);
+const streamId = params.get("stream_id");
+
+document.getElementById("title").innerText =
+"server:" + streamId;
+
+// HOST
+
+const host = "ugeen.live:8080";
+
+// FIREBASE
+
+const projectId = "YOUR_PROJECT_ID";
+const apiKey = "YOUR_FIREBASE_API_KEY";
+
+async function getDoc(doc){
+
+    const url =
+`https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/iptv/${doc}?key=${apiKey}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if(!data.fields) return null;
+
+    return {
+        username:
+            data.fields.username?.stringValue,
+        password:
+            data.fields.password?.stringValue
+    };
+}
+
+function play(server){
+
+    if(!server) return;
+
+    const url =
+`http://${host}/${server.username}/${server.password}/${streamId}`;
+
+    console.log(url);
+
+    // open stream
+    window.open(url, "_blank");
+}
+
+async function loadServers(){
+
+    try{
+
+        const s1 =
+            await getDoc("config");
+
+        const s2 =
+            await getDoc("config1");
+
+        const s3 =
+            await getDoc("config2");
+
+        document.getElementById(
+            "content"
+        ).innerHTML = `
+
+<button class="server-btn purple"
+onclick='play(${JSON.stringify(s1)})'>
+SERVER 1
+</button>
+
+<button class="server-btn blue"
+onclick='play(${JSON.stringify(s2)})'>
+SERVER 2
+</button>
+
+<button class="server-btn green"
+onclick='play(${JSON.stringify(s3)})'>
+SERVER 3
+</button>
+`;
+
+    }catch(e){
+
+        document.getElementById(
+            "content"
+        ).innerHTML = `
+<p style="color:white;">
+Failed loading servers
+</p>`;
+
+        console.log(e);
+    }
+}
+
+loadServers();
+
+</script>
+
+</body>
+</html>
