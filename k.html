@@ -69,7 +69,234 @@ body{
 <div class="header">
 ⚽ ZakariaeTV
 </div>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strmatch</title>
 
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#6A1B9A;
+}
+
+/* APPBAR */
+
+.appbar-container{
+    background:white;
+    border-bottom-left-radius:35px;
+    border-bottom-right-radius:35px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.12);
+    padding:15px;
+}
+
+.appbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo-row{
+    display:flex;
+    align-items:center;
+    margin:auto;
+}
+
+.logo-circle{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#E1BEE7;
+    border:2px solid #6A1B9A;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+    color:#6A1B9A;
+}
+
+.title{
+    margin-left:6px;
+    font-size:24px;
+    font-weight:bold;
+    color:#6A1B9A;
+    letter-spacing:1px;
+}
+
+.actions button{
+    border:none;
+    background:none;
+    font-size:22px;
+    cursor:pointer;
+    margin-left:5px;
+}
+
+/* SECTION */
+
+.section-title{
+    color:#FFC107;
+    font-size:18px;
+    font-weight:bold;
+    margin:20px 16px 10px;
+}
+
+/* CARD */
+
+.card{
+    background:white;
+    margin:6px 16px;
+    border-radius:25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 18px;
+    text-decoration:none;
+    color:black;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.02);
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+
+.left{
+    display:flex;
+    align-items:center;
+}
+
+.left img{
+    width:32px;
+    margin-right:10px;
+}
+
+.arrow{
+    color:red;
+    font-size:22px;
+}
+
+.footer{
+    color:white;
+    text-align:center;
+    margin:25px 0;
+    font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- APP BAR -->
+
+<div class="appbar-container">
+
+    <div class="appbar">
+
+        <div class="actions">
+            <button onclick="location.reload()">🔄</button>
+        </div>
+
+        <div class="logo-row">
+            <div class="logo-circle">⚽</div>
+            <div class="title">Strmatch</div>
+        </div>
+
+        <div class="actions">
+            <button onclick="history.back()">⬅</button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CHANNEL -->
+
+<div class="section-title">Channel</div>
+
+<a class="card" href="beinsports_page.html">
+    <div class="left">
+        Beinsports Channel
+    </div>
+    <div class="arrow">➜</div>
+</a>
+
+<a class="card" href="ssc_page.html">
+    <div class="left">
+        Alwan Channel
+    </div>
+    <div class="arrow">➜</div>
+</a>
+
+<a class="card" href="espn_page.html">
+    <div class="left">
+        ESPN CHANNEL
+    </div>
+    <div class="arrow">➜</div>
+</a>
+
+<a class="card" href="canal_sport_page.html">
+    <div class="left">
+        Canal Sport
+    </div>
+    <div class="arrow">➜</div>
+</a>
+
+<!-- COMPETITION -->
+
+<div class="section-title">Competition</div>
+
+<a class="card" href="premier_data.html?inf=0">
+    <div class="left">
+        <img src="images/iliga.jpg">
+        La Liga
+    </div>
+    <div class="arrow">➜</div>
+</a>
+
+<a class="card" href="premier_data.html?inf=1">
+    <div class="left">
+        <img src="images/i.png">
+        Premier Ligue
+    </div>
+    <div class="arrow">➜</div>
+</a>
+
+<a class="card" href="premier_data.html?inf=2">
+    <div class="left">
+        <img src="images/serieait.png">
+        SerieA
+    </div>
+    <div class="arrow">➜</div>
+</a>
+
+<a class="card" href="premier_data.html?inf=3">
+    <div class="left">
+        <img src="images/i2.jpg">
+        Bundesliga
+    </div>
+    <div class="arrow">➜</div>
+</a>
+
+<a class="card" href="premier_data.html?inf=4">
+    <div class="left">
+        <img src="images/turkey.png">
+        superliga turk
+    </div>
+    <div class="arrow" style="color:black;">➜</div>
+</a>
+
+<!-- FOOTER -->
+
+<div class="footer">
+Dont Forget support US
+</div>
+
+</body>
+</html>
 <div class="section-title">
 Download APK
 </div>
