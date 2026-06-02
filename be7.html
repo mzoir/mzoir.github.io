@@ -38,72 +38,11 @@ video{
 <script>
 function play() {
   const streamUrl =
-    "http://your-server/video-path";
+    "https://ugeen.live:8080/Ugeen_Zsjm16/xi4pmA/3228";
 
   window.location.href = streamUrl;
 }
 </script>
-<video id="video" controls autoplay playsinline></video>
-<div id="msg">Loading...</div>
-
-<script>
-const params = new URLSearchParams(window.location.search);
-const streamId = params.get("stream_id");
-
-const msg = document.getElementById("msg");
-const video = document.getElementById("video");
-
-if (!streamId) {
-    msg.innerText = "Missing stream_id";
-} else {
-
-    const streamUrl =
-      `https://58.mzliker99.workers.dev/play?stream_id=${streamId}`;
-
-    console.log("STREAM URL:", streamUrl);
-
-    if (Hls.isSupported()) {
-
-        const hls = new Hls();
-
-        hls.loadSource(streamUrl);
-        hls.attachMedia(video);
-
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-            msg.style.display = "none";
-            video.play();
-        });
-
-        hls.on(Hls.Events.ERROR, function (event, data) {
-            console.log("HLS ERROR:", data);
-
-            msg.innerText =
-              "Player error: " +
-              data.type +
-              " / " +
-              data.details;
-        });
-
-    } else if (
-        video.canPlayType(
-          "application/vnd.apple.mpegurl"
-        )
-    ) {
-
-        video.src = streamUrl;
-
-        video.addEventListener(
-          "loadedmetadata",
-          function () {
-              msg.style.display = "none";
-              video.play();
-          }
-        );
-
-    } else {
-        msg.innerText = "HLS not supported";
-    }
-}
 </script>
 
 </body>
