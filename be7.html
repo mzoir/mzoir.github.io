@@ -33,17 +33,71 @@ video{
 </head>
 
 <body>
-<button onclick="play()">Play</button>
+    <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/mpegts.js@latest"></script>
+
+<style>
+body{
+  margin:0;
+  background:black;
+}
+
+video{
+  width:100%;
+  height:100vh;
+  background:black;
+}
+
+#msg{
+  position:absolute;
+  top:50%;
+  width:100%;
+  text-align:center;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<video id="video" controls autoplay playsinline></video>
+<div id="msg">Loading...</div>
 
 <script>
-function play() {
-  const streamUrl =
-    "https://ugeen.live:8080/Ugeen_Zsjm16/xi4pmA/3228";
+const params = new URLSearchParams(window.location.search);
+const streamUrl = params.get("url");
 
-  window.location.href = streamUrl;
+const video = document.getElementById("video");
+const msg = document.getElementById("msg");
+
+if (!streamUrl) {
+  msg.innerText = "Missing url";
+} else if (mpegts.getFeatureList().mseLivePlayback) {
+
+  const player = mpegts.createPlayer({
+    type: 'mpegts',
+    isLive: true,
+    url: streamUrl
+  });
+
+  player.attachMediaElement(video);
+  player.load();
+  player.play();
+
+  msg.style.display = "none";
+
+} else {
+  msg.innerText = "TS not supported";
 }
 </script>
-</script>
+
+</body>
+</html>
 
 </body>
 </html>
