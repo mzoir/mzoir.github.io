@@ -1,196 +1,132 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bein Sports</title>
-
-<style>
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#673AB7;
-}
-
-/* APPBAR */
-
-.appbar{
-    background:white;
-    padding:18px;
-    border-bottom-left-radius:30px;
-    border-bottom-right-radius:30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 4px 8px rgba(0,0,0,.12);
-}
-
-.title{
-    color:#673AB7;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.icon-btn{
-    border:none;
-    background:none;
-    font-size:22px;
-    cursor:pointer;
-}
-
-/* LOADER */
-
-.loader{
-    border:5px solid #eee;
-    border-top:5px solid #673AB7;
-    border-radius:50%;
-    width:45px;
-    height:45px;
-    animation:spin 1s linear infinite;
-    margin:50px auto;
-}
-
-@keyframes spin{
-    100%{
-        transform:rotate(360deg);
-    }
-}
-
-/* CHANNEL CARD */
-
-.container{
-    padding:12px;
-}
-
-.card{
-    background:white;
-    border-radius:18px;
-    padding:14px;
-    margin-bottom:12px;
-    display:flex;
-    align-items:center;
-    cursor:pointer;
-    transition:.25s;
-    box-shadow:0 5px 10px rgba(0,0,0,.08);
-}
-
-.card:hover{
-    transform:translateY(-2px);
-}
-
-.icon-box{
-    width:55px;
-    height:55px;
-    border-radius:14px;
-    background:#F3E5F5;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.icon-box img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.channel-name{
-    flex:1;
-    margin-left:12px;
-    font-size:16px;
-    font-weight:600;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.play{
-    color:#673AB7;
-    font-size:26px;
-}
-</style>
-</head>
-
-<body>
-
-<!-- APPBAR -->
-
-<div class="appbar">
-    <button class="icon-btn" onclick="location.reload()">🔄</button>
-
-    <div class="title">Bein Sports</div>
-
-    <button class="icon-btn" onclick="history.back()">⬅</button>
-</div>
-
-<!-- CONTENT -->
-
-<div id="loader" class="loader"></div>
-
-<div id="channels" class="container"></div>
-
 <script>
 
-// credentials like AuthService.getCredentials()
-const username = localStorage.getItem("username");
-const password = localStorage.getItem("password");
+// FIREBASE PROJECT
 
-const url =
-`http://ugeen.live:8080/player_api.php?username=${username}&password=${password}&action=get_live_streams`;
+const projectId = "plmo-c5ddd";
+const apiKey = "AIzaSyDPxhzmTie_ysPIMyB9Ivix5BHMetyZWxs";
+
+// FIRESTORE DOC
+// change if your credentials are stored elsewhere
+
+const firestoreUrl =
+`https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/iptv/config?key=${apiKey}`;
+
+async function getCredentials(){
+
+    try{
+
+        const res = await fetch(firestoreUrl);
+        const data = await res.json();
+
+        console.log(data);
+
+        if(!data.fields){
+            throw "No firestore data";
+        }
+
+        return {
+            username:
+                data.fields.username.stringValue,
+            password:
+                data.fields.password.stringValue
+        };
+
+    }catch(e){
+
+        console.log(e);
+        return null;
+    }
+}
 
 async function loadChannels(){
 
     try{
 
-        const response = await fetch(url);
-        const data = await response.json();
+        // GET USERNAME + PASSWORD FROM FIREBASE
 
-        const channels = data.filter(ch =>
-            ch.name &&
-            (
-                ch.name.toLowerCase().includes("bein sports") ||
-                ch.name.toLowerCase().includes("bein")
-            )
-        );
+        const creds = await getCredentials();
 
-        document.getElementById("loader").style.display="none";
+        if(!creds){
+            throw "Credentials not found";
+        }
 
-        const container = document.getElementById("channels");
+        const username = creds.username;
+        const password = creds.password;
+
+        // IPTV API
+
+        const url =
+`http://ugeen.live:8080/player_api.php?username=${username}&password=${password}&action=get_live_streams`;
+
+        console.log(url);
+
+        const response =
+            await fetch(url);
+
+        const data =
+            await response.json();
+
+        const channels =
+            data.filter(ch =>
+                ch.name &&
+                (
+                    ch.name.toLowerCase().includes("bein sports") ||
+                    ch.name.toLowerCase().includes("bein")
+                )
+            );
+
+        document.getElementById(
+            "loader"
+        ).style.display="none";
+
+        const container =
+            document.getElementById(
+                "channels"
+            );
 
         channels.forEach(ch=>{
 
-            const card = document.createElement("div");
+            const card =
+                document.createElement(
+                    "div"
+                );
+
             card.className="card";
 
             card.onclick = ()=>{
+
                 window.location.href =
                 `be7.html?stream_id=${ch.stream_id}`;
             };
 
             card.innerHTML = `
-                <div class="icon-box">
-                    ${
-                        ch.stream_icon
-                        ? `<img src="${ch.stream_icon}">`
-                        : `📺`
-                    }
-                </div>
+<div class="icon-box">
+${
+ch.stream_icon
+? `<img src="${ch.stream_icon}">`
+: `📺`
+}
+</div>
 
-                <div class="channel-name">
-                    ${ch.name}
-                </div>
+<div class="channel-name">
+${ch.name}
+</div>
 
-                <div class="play">▶</div>
-            `;
+<div class="play">▶</div>
+`;
 
             container.appendChild(card);
         });
 
     }catch(e){
-        document.getElementById("loader").style.display="none";
 
-        document.getElementById("channels").innerHTML=
+        document.getElementById(
+            "loader"
+        ).style.display="none";
+
+        document.getElementById(
+            "channels"
+        ).innerHTML =
         "<p style='color:white;text-align:center;'>Failed to load channels</p>";
 
         console.log(e);
@@ -200,6 +136,3 @@ async function loadChannels(){
 loadChannels();
 
 </script>
-
-</body>
-</html>
