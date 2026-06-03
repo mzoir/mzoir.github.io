@@ -188,9 +188,21 @@ async function loadChannels(){
 
             const card = document.createElement("div");
             card.className = "card";
-      card.onclick = () => {
-  window.location.href =
-    `https://58.mzliker99.workers.dev/player?stream_id=${ch.stream_id}`;
+     card.onclick = async () => {
+
+  const creds = await getCredentials();
+
+  const streamUrl =
+    `http://ugeen.live:8080/${creds.username}/${creds.password}/${ch.stream_id}`;
+
+  const vlcUrl =
+    `vlc://${streamUrl}`;
+
+  window.location.href = vlcUrl;
+
+  setTimeout(() => {
+    window.location.href = streamUrl;
+  }, 1500);
 };
             card.innerHTML = `
 <div class="icon-box">
