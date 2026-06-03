@@ -80,9 +80,7 @@ async function loadChannels(){
 
                 try {
 
-                    window.location.href =
-                      `vlc://${streamUrl}`;
-
+                    window.open(streamUrl, "_blank");
                     setTimeout(() => {
                         window.location.href =
                           streamUrl;
