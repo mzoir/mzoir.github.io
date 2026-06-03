@@ -44,12 +44,50 @@ function showError(msg){
   const channels = document.getElementById("channels");
 
   if (loader) loader.style.display = "none";
+
   if (channels) {
     channels.innerHTML =
       `<p style="color:white;text-align:center">${msg}</p>`;
   } else {
     alert(msg);
   }
+}
+
+function safeFileName(name){
+  return name
+    .replace(/[\\/:*?"<>|]/g, "_")
+    .replace(/\s+/g, "_");
+}
+
+function downloadM3U(channelName, streamUrl){
+  const content =
+    `#EXTM3U\n#EXTINF:-1,${channelName}\n${streamUrl}\n`;
+
+  const blob = new Blob([content], {
+    type: "audio/x-mpegurl"
+  });
+
+  const a = document.createElement("a");
+  const objectUrl = URL.createObjectURL(blob);
+
+  a.href = objectUrl;
+  a.download = `${safeFileName(channelName)}.m3u`;
+
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+}
+
+function openInVLC(streamUrl, channelName){
+  const vlcUrl = `vlc://${streamUrl}`;
+
+  window.location.href = vlcUrl;
+
+  setTimeout(() => {
+    downloadM3U(channelName, streamUrl);
+  }, 1200);
 }
 
 async function getCredentials(){
@@ -97,6 +135,10 @@ async function loadChannels(){
     if (loader) loader.style.display = "none";
     if (!container) return;
 
+    if (channels.length === 0) {
+      return showError("No Bein channels found");
+    }
+
     channels.forEach(ch => {
       const card = document.createElement("div");
       card.className = "card";
@@ -104,33 +146,10 @@ async function loadChannels(){
       card.onclick = () => {
         const streamUrl =
           `http://ugeen.live:8080/${creds.username}/${creds.password}/${ch.stream_id}`;
-     function openInVLC(streamUrl) {
-    // Construct the custom VLC protocol link
-    const vlcUrl = `vlc://${streamUrl}`;
-    
-    // Create a hidden anchor element
-    const link = document.createElement('a');
-    link.href = vlcUrl;
-    
-    // Append, click, and remove the link
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
-        openInVLC(streamUrl);
-        const content =
-          `#EXTM3U\n#EXTINF:-1,${ch.name}\n${streamUrl}\n`;
 
-        const blob = new Blob([content], {
-          type: "audio/x-mpegurl"
-        });
+        console.log("Stream:", streamUrl);
 
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = `${ch.name}.m3u`;
-        a.click();
-
-        URL.revokeObjectURL(a.href);
+        openInVLC(streamUrl, ch.name);
       };
 
       card.innerHTML = `
