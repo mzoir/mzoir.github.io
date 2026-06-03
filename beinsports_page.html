@@ -104,7 +104,19 @@ async function loadChannels(){
       card.onclick = () => {
         const streamUrl =
           `http://ugeen.live:8080/${creds.username}/${creds.password}/${ch.stream_id}`;
-
+     function openInVLC(streamUrl) {
+    // Construct the custom VLC protocol link
+    const vlcUrl = `vlc://${streamUrl}`;
+    
+    // Create a hidden anchor element
+    const link = document.createElement('a');
+    link.href = vlcUrl;
+    
+    // Append, click, and remove the link
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
         const content =
           `#EXTM3U\n#EXTINF:-1,${ch.name}\n${streamUrl}\n`;
 
