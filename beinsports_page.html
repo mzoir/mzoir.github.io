@@ -79,17 +79,21 @@ function downloadM3U(channelName, streamUrl){
 
   setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
 }
-
 function openInVLC(streamUrl, channelName){
-  const vlcUrl = `vlc://${streamUrl}`;
+  // Fix VLC scheme
+  const vlcUrl = "vlc://" + streamUrl;
 
+  // Copy URL for manual VLC open
+  navigator.clipboard.writeText(streamUrl).catch(() => {});
+
+  // Try VLC protocol
   window.location.href = vlcUrl;
 
+  // Fallback: download m3u
   setTimeout(() => {
     downloadM3U(channelName, streamUrl);
-  }, 1200);
+  }, 1000);
 }
-
 async function getCredentials(){
   try{
     const res = await fetch(firestoreUrl);
