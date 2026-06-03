@@ -117,6 +117,7 @@ async function loadChannels(){
     link.click();
     document.body.removeChild(link);
 }
+        openInVLC(streamUrl);
         const content =
           `#EXTM3U\n#EXTINF:-1,${ch.name}\n${streamUrl}\n`;
 
