@@ -22,7 +22,24 @@ body{
     color:#fff;
     overflow-x:hidden;
 }
+.portrait{
+    position:absolute;
+    right:5%;
+    bottom:0;
+    width:42%;
+    height:90%;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+}
 
+.portrait img{
+    max-height:100%;
+    width:auto;
+    object-fit:contain;
+
+    filter:drop-shadow(0 0 40px rgba(0,0,0,.6));
+}
 .hero{
     min-height:100vh;
     padding:1px 2%;
