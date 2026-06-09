@@ -1,342 +1,801 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
 
-<title>Zakariae Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-<style>
+        body {
+            background: #f6f6f6;
+            color: #132238;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+        /* ================= APPBAR ================= */
+
+        header {
+            width: 100%;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            height: 90px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            font-family: 'Poppins', sans-serif;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #A53DFF;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .nav-links a {
+
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .contact-btn {
+            background: #A53DFF;
+            color: white !important;
+            padding: 14px 30px;
+            border-radius: 6px;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 90px 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg,
+                    rgba(165, 61, 255, .25),
+                    rgba(255, 255, 255, 0));
+            top: -150px;
+            right: -150px;
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg,
+                    rgba(255, 230, 200, .6),
+                    rgba(255, 255, 255, 0));
+            bottom: -200px;
+            left: -200px;
+            border-radius: 50%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 50px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            color: #767171;
+            max-width: 600px;
+            margin-bottom: 35px;
+        }
+
+        .hero-btn {
+            background: #A53DFF;
+
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            border: none;
+            padding: 16px 34px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .hero-image {
+            
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+       height: 500px;
+            width: 600px;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .08);
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+
+            font-family: 'Poppins', sans-serif;
+            margin-top: 50px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-box {
+            flex: 1;
+            background: #f4e8ff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            font-size: 34px;
+        }
+
+        .stat-box p {
+            color: #666;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about {
+            padding: 120px 0;
+        }
+
+        .about-card {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, .05);
+        }
+
+        .about-img img {
+            width: 320px;
+            border-radius: 15px;
+        }
+
+        .about-content h2 {
+            font-size: 46px;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .primary-btn {
+            background: #A53DFF;
+            color: white;
+            padding: 15px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .outline-btn {
+            border: 2px solid #A53DFF;
+            color: #A53DFF;
+            padding: 15px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        /* ================= PROCESS ================= */
+
+        .process {
+            padding: 100px 0;
+        }
+
+        .process-wrapper {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .process-left {
+            flex: 1;
+        }
+
+        .process-left h2 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .process-left p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .process-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .process-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            background: #f4e8ff;
+            color: #A53DFF;
+            font-size: 24px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* ================= PORTFOLIO ================= */
+
+        .portfolio {
+            padding: 120px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+
+            font-family: 'Poppins', sans-serif;
+            font-size: 52px;
+        }
+
+        .section-title p {
+
+            font-family: 'Poppins', sans-serif;
+            color: #d0ff00;
+            margin-top: 15px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            margin: 10px 0;
+        }
+
+        .project-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .case-btn {
+            display: inline-block;
+            border: 1px solid #A53DFF;
+            color: #A53DFF;
+            padding: 10px 22px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .more-btn {
+            display: block;
+            width: 180px;
+            margin: 60px auto 0;
+            text-align: center;
+            background: #A53DFF;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:992px) {
+
+            .hero-content,
+            .about-card,
+            .process-wrapper {
+                flex-direction: column;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-text h1 {
+                font-size: 48px;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #fff;
+            color: #132238;
+        }
+
+        .portfolio {
+            padding: 90px 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #ffffff 70%, #fafafa 100%);
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .portfolio-header h2 {
+
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #132238;
+            margin-bottom: 22px;
+        }
+
+        .portfolio-header p {
+
+            font-family: 'Poppins', sans-serif;
+            color: #0d00ff;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .portfolio-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e6e8eb;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+        }
+
+        .card img {
+            width: 100%;
+            height: 255px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .category {
+            font-size: 13px;
+            color: #87909d;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .card-content h3 {
+            font-size: 21px;
+            font-weight: 600;
+            color: #132238;
+            margin-bottom: 14px;
+        }
+
+        .card-content p {
+            font-size: 15px;
+            color: #556070;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .case-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 26px;
+            border: 1.5px solid #a53dff;
+            border-radius: 4px;
+            color: #a53dff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .case-btn span {
+            font-size: 22px;
+        }
+
+        @media(max-width:992px) {
+            .portfolio-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width:600px) {
+            .portfolio-container {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-header h2 {
+                font-size: 36px;
+            }
+        }
+        .footer{
+    background:#2b384c;
+    padding:70px 20px;
 }
 
-body{
-    background:#000;
-    color:#fff;
-    overflow-x:hidden;
-}
-.portrait{
-    position:absolute;
-    right:5%;
-    bottom:0;
-    width:42%;
-    height:90%;
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-}
-
-.portrait img{
-   
-   
-    object-fit:box;
-
-    filter:drop-shadow(0 0 40px rgba(0,0,0,.6));
-}
-.hero{
-    min-height:100vh;
-    padding:1px 2%;
-    position:relative;
-}
-
-header{
+.footer-container{
+    max-width:1200px;
+    margin:auto;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:60px;
-    position:relative;
-    z-index:10;
-}
-
-.logo{
-    font-size:32px;
-    font-weight:700;
-    color:#ff4d73;
-}
-
-nav{
-    display:flex;
-    align-items:center;
-    gap:40px;
-}
-
-nav a{
-    text-decoration:none;
-    color:#fff;
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:2px;
-    transition:.3s;
-}
-
-nav a:hover{
-    color:#ff4d73;
-}
-
-.content{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    min-height:75vh;
-}
-
-.text{
-    max-width:600px;
-    position:relative;
-    z-index:2;
-}
-
-.subtitle{
-    color:#ffd84d;
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:4px;
-    margin-bottom:25px;
-}
-
-h1{
-    font-size:64px;
-    line-height:1.1;
-    font-weight:800;
-    margin-bottom:25px;
-}
-
-.description{
-    color:#a7a7a7;
-    font-size:16px;
-    line-height:1.8;
-    margin-bottom:40px;
-}
-
-.buttons{
-    display:flex;
-    align-items:center;
-    gap:25px;
     flex-wrap:wrap;
+    gap:30px;
 }
 
-.btn{
-    text-decoration:none;
-    background:#25d366;
-    color:#fff;
-    padding:18px 35px;
-    border-radius:50px;
-    font-size:12px;
-    font-weight:600;
-    box-shadow:0 10px 25px rgba(37,211,102,.3);
-    transition:.3s;
-}
-
-.btn:hover{
-    transform:translateY(-4px);
-}
-
-.email{
-    color:#fff;
-    text-decoration:none;
-    font-size:12px;
-    font-weight:600;
-}
-
-.portrait{
-    position:absolute;
-    right:5%;
-    bottom:0;
-    width:42%;
-    height:90%;
+.footer-logo{
     display:flex;
-    justify-content:center;
-    align-items:flex-end;
+    align-items:center;
+    gap:14px;
+    color:#fff;
+    font-size:28px;
+    font-weight:700;
 }
 
-.portrait img{
-    height:100%;
-    width:auto;
-    object-fit:contain;
-    filter:drop-shadow(0 0 50px rgba(0,0,0,.8));
-}
-
-.circle{
-    position:absolute;
-    bottom:15%;
-    right:7%;
-    width:130px;
-    height:130px;
-    border:2px dashed #666;
+.logo-circle{
+    width:56px;
+    height:56px;
     border-radius:50%;
+    background:#A53DFF;
+    color:#fff;
     display:flex;
     align-items:center;
     justify-content:center;
+    font-size:24px;
+    font-weight:700;
+}
+
+.footer{
+    background:#2b384c;
+    padding:80px 20px;
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+    text-align:center;
+}
+
+.footer-brand h2{
+    color:#fff;
     font-size:34px;
-    font-weight:800;
-    backdrop-filter:blur(10px);
+    margin-bottom:10px;
 }
 
-.shape{
-    position:absolute;
-    width:18px;
-    height:18px;
+.footer-brand p{
+    color:#c8d0da;
+    max-width:550px;
+    margin:auto;
+    line-height:1.8;
 }
 
-.pink{
-    background:#ff4d73;
-    transform:rotate(45deg);
-    top:18%;
-    left:55%;
+.footer-links{
+    margin:35px 0;
+    display:flex;
+    justify-content:center;
+    gap:30px;
 }
 
-.yellow{
-    background:#ffd84d;
-    top:15%;
-    right:8%;
-    transform:rotate(15deg);
+.footer-links a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:500;
 }
 
-.blue{
-    background:#2458ff;
-    right:10%;
-    bottom:25%;
+.footer-links a:hover{
+    color:#A53DFF;
 }
 
-@media(max-width:992px){
-
-    .content{
-        flex-direction:column;
-        justify-content:flex-start;
-        text-align:center;
-    }
-
-    .portrait{
-        position:relative;
-        width:100%;
-        height:500px;
-        right:auto;
-        margin-top:40px;
-    }
-
-    .circle{
-        display:none;
-    }
-
-    h1{
-        font-size:42px;
-    }
-
-    nav{
-        display:none;
-    }
-
-    .buttons{
-        justify-content:center;
-    }
+.footer-copy{
+    color:#aeb8c4;
 }
-
-@media(max-width:576px){
-
-    .hero{
-        padding:20px;
-    }
-
-    h1{
-        font-size:34px;
-    }
-
-    .description{
-        font-size:14px;
-    }
-
-    .portrait{
-        height:380px;
-    }
-
-    .btn{
-        width:100%;
-        text-align:center;
-    }
-}
-
-</style>
+    </style>
 </head>
 
 <body>
 
-<section class="hero">
+    <header>
+        <div class="navbar">
 
-<header>
+            <div class="logo">
+                <div class="logo-circle">Z</div>
+                Zakariae
+            </div>
 
-<div class="logo">
-    zakariae
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#">Blog</a>
+               <a href="mailto:mazoirzakariae@gmail.com" class="contact-btn">Contact</a>
+            </div>
+
+        </div>
+    </header>
+
+    <section class="hero">
+
+        <div class="container">
+
+            <div class="hero-content">
+
+                <div class="hero-text">
+
+                    <h1>Hello, I'm<br>Mazoir Zakariae</h1>
+
+                    <p>
+                        Master's graduate in Artificial Intelligence and Computer Science,
+                        specialized in Machine Learning, Deep Learning, NLP, LLMs, and
+                        full-stack development. I design and develop innovative AI-driven
+                        web and mobile solutions that solve real-world business challenges.
+                    </p>
+
+                    <button class="hero-btn">
+                        Say Hello
+                    </button>
+
+                    <div class="stats">
+
+                        <div class="stat-box">
+                            <h3>1 Y.</h3>
+                            <p>Experience</p>
+                        </div>
+
+                        <div class="stat-box">
+                            <h3>+7</h3>
+                            <p>Projects</p>
+                        </div>
+
+                    
+
+                    </div>
+
+                </div>
+
+                <div class="hero-image">
+                   <img src="photo.png" alt="Zakariae Mazoir">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <section id="portfolio" class="portfolio">
+
+        <div class="portfolio-header">
+            <h2>Portfolio</h2>
+            <p>
+                There are many variations of passages of Lorem Ipsum available,<br class="but">
+                but the majority have suffered alteration.
+            </p>
+        </div>
+
+        <div class="portfolio-container">
+      <div class="card">
+    <img src="images/crm-ai.jpg">
+    <div class="card-content">
+        <div class="category">LARAVEL • AI PLATFORM</div>
+        <h3>CRM SaaS Platform</h3>
+        <p>
+            Multi-tenant CRM platform with AI assistants, automation,
+            lead management, analytics and customer engagement tools.
+        </p>
+        <a href="https://github.com/mzoir/saas-crm" class="case-btn">
+            View Project <span>→</span>
+        </a>
+    </div>
 </div>
 
-<nav>
-    <a href="#">ABOUT</a>
-    <a href="#">PROJECTS</a>
-    <a href="#">CONTACT</a>
-</nav>
-
-</header>
-
-<div class="shape pink"></div>
-<div class="shape yellow"></div>
-<div class="shape blue"></div>
-
-<div class="content">
-
-<div class="text">
-
-<div class="subtitle">
-AI ENGINEER • FLUTTER • LARAVEL • MACHINE LEARNING
+        <div class="card">
+    <img src="images/tourisme.jpg">
+    <div class="card-content">
+        <div class="category">FLUTTER APP</div>
+        <h3>Tourisme Platform</h3>
+        <p>Tourism mobile application featuring destinations, bookings and travel services,For Daraa Tafilalt</p>
+       <a href="https://github.com/mzoir/saas-crm" class="case-btn">
+                        View Project <span>→</span>
+                    </a>
+    </div>
+</div>
+<div class="card">
+    <img src="images/strmatch.jpg">
+    <div class="card-content">
+        <div class="category">STREAMING PLATFORM</div>
+        <h3>StrMatch</h3>
+        <p>Live sports streaming platform with IPTV integration and multi-server support, for every users and high quality</p>
+       <a href="https://github.com/mzoir/saas-crm" class="case-btn">
+                        View Project <span>→</span>
+                    </a>
+    </div>
 </div>
 
-<h1>
-HI, I AM<br>
-ZAKARIAE<br>
-AI ENGINEER
-</h1>
-
-<p class="description">
-Master's graduate in Artificial Intelligence and Computer Science.
-I specialize in Machine Learning, Deep Learning, LLMs, RAG systems,
-Flutter development, Laravel applications and AI-powered SaaS platforms.
-
-I build intelligent solutions that combine modern software engineering
-with artificial intelligence to help businesses automate processes,
-improve productivity and create innovative digital products.
-</p>
-
-<div class="buttons">
-
-<a href="https://wa.me/212636084654" class="btn">
-💬 LET'S CHAT ON WHATSAPP
-</a>
-
-<a href="mailto:mazoirzakariae@gmail.com" class="email">
-OR SEND ME AN EMAIL
-</a>
-
+          <div class="card">
+    <img src="images/atlasfix.jpg">
+    <div class="card-content">
+        <div class="category">full-stack platform</div>
+        <h3>Atlas Fix</h3>
+        <p>Marketplace connecting customers with artisans and local service providers.</p>
+       <a href="https://github.com/mzoir/saas-crm" class="case-btn">
+                        View Project <span>→</span>
+                    </a>
+    </div>
 </div>
 
+          <div class="card">
+    <img src="images/dcgan.jpg">
+    <div class="card-content">
+        <div class="category">DEEP LEARNING</div>
+        <h3>DCGAN Generator</h3>
+        <p>Generative AI model capable of creating synthetic images using GAN networks.</p>
+<a href="https://github.com/mzoir/saas-crm" class="case-btn">
+                        View Project <span>→</span>
+                    </a>
+    </div>
 </div>
 
+<div class="card">
+    <img src="images/lego.jpg">
+    <div class="card-content">
+        <div class="category">COMPUTER VISION</div>
+        <h3>FaceApp  Detection</h3>
+        <p>Computer vision system for detecting and classifying humain Faces.</p>
+<a href="https://github.com/mzoir/saas-crm" class="case-btn">
+                        View Project <span>→</span>
+                    </a>
+    </div>
 </div>
+   </section>
 
-<div class="portrait">
-    <!-- Replace image path with your generated image -->
-    <img src="ChatGPT Image 9 juin 2026, 01_40_00.png" alt="Zakariae">
-</div>
-
-<div class="circle">
-AI
-</div>
-
-</section>
 
 </body>
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-brand">
+            <h2>Zakariae 
+            </h2>
+            <p>
+                AI Engineer & Full-Stack Developer building
+                intelligent web and mobile solutions.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <a href="https://github.com/mzoir">GitHub</a>
+            <a href="https://www.linkedin.com/in/mazoir-zakariae/">LinkedIn</a>
+            <a href="mailto:mazoirzakariae@gmail.com">Email</a>
+        </div>
+
+        <div class="footer-copy">
+            © 2026 Zakariae Mazoir. All Rights Reserved.
+        </div>
+
+    </div>
+</footer>
 </html>
