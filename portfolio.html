@@ -1,261 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio Hero</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+<title>Zakariae Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+.hero{
+    min-height:100vh;
+    padding:25px 7%;
+    position:relative;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:60px;
+    position:relative;
+    z-index:10;
+}
+
+.logo{
+    font-size:32px;
+    font-weight:700;
+    color:#ff4d73;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:40px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#fff;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#ff4d73;
+}
+
+.content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    min-height:75vh;
+}
+
+.text{
+    max-width:600px;
+    position:relative;
+    z-index:2;
+}
+
+.subtitle{
+    color:#ffd84d;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:4px;
+    margin-bottom:25px;
+}
+
+h1{
+    font-size:64px;
+    line-height:1.1;
+    font-weight:800;
+    margin-bottom:25px;
+}
+
+.description{
+    color:#a7a7a7;
+    font-size:16px;
+    line-height:1.8;
+    margin-bottom:40px;
+}
+
+.buttons{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    text-decoration:none;
+    background:#25d366;
+    color:#fff;
+    padding:18px 35px;
+    border-radius:50px;
+    font-size:12px;
+    font-weight:600;
+    box-shadow:0 10px 25px rgba(37,211,102,.3);
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+.email{
+    color:#fff;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:600;
+}
+
+.portrait{
+    position:absolute;
+    right:5%;
+    bottom:0;
+    width:42%;
+    height:90%;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+}
+
+.portrait img{
+    height:100%;
+    width:auto;
+    object-fit:contain;
+    filter:drop-shadow(0 0 50px rgba(0,0,0,.8));
+}
+
+.circle{
+    position:absolute;
+    bottom:15%;
+    right:7%;
+    width:130px;
+    height:130px;
+    border:2px dashed #666;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    font-weight:800;
+    backdrop-filter:blur(10px);
+}
+
+.shape{
+    position:absolute;
+    width:18px;
+    height:18px;
+}
+
+.pink{
+    background:#ff4d73;
+    transform:rotate(45deg);
+    top:18%;
+    left:55%;
+}
+
+.yellow{
+    background:#ffd84d;
+    top:15%;
+    right:8%;
+    transform:rotate(15deg);
+}
+
+.blue{
+    background:#2458ff;
+    right:10%;
+    bottom:25%;
+}
+
+@media(max-width:992px){
+
+    .content{
+        flex-direction:column;
+        justify-content:flex-start;
+        text-align:center;
     }
 
-    body {
-      font-family: popins, sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
+    .portrait{
+        position:relative;
+        width:100%;
+        height:500px;
+        right:auto;
+        margin-top:40px;
     }
 
-    .hero {
-      min-height: 100vh;
-      padding: 2px 1% 2px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
+    .circle{
+        display:none;
     }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
+    h1{
+        font-size:42px;
     }
 
-    .logo {
-      font-size: 28px;
-      font-weight: 700;
-      color: #e63b68;
+    nav{
+        display:none;
     }
 
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 45px;
-      font-size: 13px;
-      letter-spacing: 2px;
-      font-weight: bold;
+    .buttons{
+        justify-content:center;
+    }
+}
+
+@media(max-width:576px){
+
+    .hero{
+        padding:20px;
     }
 
-    .content {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      position: relative;
-      z-index: 2;
+    h1{
+        font-size:34px;
     }
 
-    .text {
-      max-width: 560px;
+    .description{
+        font-size:14px;
     }
 
-    .subtitle {
-      color: #f4d13d;
-      font-size: 14px;
-      letter-spacing: 4px;
-      font-weight: bold;
-      margin-bottom: 30px;
+    .portrait{
+        height:380px;
     }
 
-    h1 {
-      font-size: 56px;
-      line-height: 1.2;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 30px;
+    .btn{
+        width:100%;
+        text-align:center;
     }
+}
 
-    p {
-      color: #aaa;
-      font-size: 20px;
-      line-height: 1.6;
-      margin-bottom: 45px;
-    }
-
-    .buttons {
-      display: flex;
-      align-items: center;
-      gap: 35px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      background: #20c463;
-      color: #fff;
-      padding: 20px 36px;
-      border-radius: 40px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 10px 30px rgba(32, 196, 99, 0.35);
-    }
-
-    .email {
-      color: #fff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .portrait {
-      position: absolute;
-      right: 8%;
-      bottom: 0;
-      height: 85%;
-      width: 42%;
-      background: linear-gradient(to right, transparent, rgba(255,255,255,0.05)),
-                  url("https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80");
-      background-size: cover;
-      background-position: center;
-      filter: grayscale(100%);
-      opacity: 0.85;
-      border-radius: 10px;
-    }
-    .circle {
-      position: absolute;
-      right: 10%;
-      bottom: 12%;
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      border: 2px dashed #777;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 56px;
-      font-weight: 900;
-      transform: rotate(-15deg);
-    }
-
-    .shape {
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      z-index: 1;
-    }
-
-    .pink {
-      background: #e63b68;
-      top: 18%;
-      left: 52%;
-      transform: rotate(45deg);
-    }
-
-    .yellow {
-      background: #ffd52e;
-      top: 18%;
-      right: 6%;
-      transform: rotate(12deg);
-    }
-
-    .blue {
-      background: #1b5cff;
-      right: 5%;
-      bottom: 28%;
-    }
-
-    @media (max-width: 900px) {
-      nav {
-        display: none;
-      }
-
-      .content {
-        align-items: flex-start;
-        padding-top: 80px;
-      }
-
-      h1 {
-        font-size: 40px;
-      }
-
-      p {
-        font-size: 17px;
-      }
-
-      .portrait {
-        opacity: 0.25;
-        width: 100%;
-        right: 0;
-      }
-
-      .circle {
-        display: none;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .hero {
-        padding: 25px 5%;
-      }
-
-      h1 {
-        font-size: 34px;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  </style>
+</style>
 </head>
 
 <body>
-  <section class="hero">
-    <header>
-      <div class="logo">zakariae</div>
 
-      <nav>
-        <a href="#">RECENT WORK</a>
-        <a href="#">CONTACT</a>
-        <a href="#">EN⌄</a>
-      </nav>
-    </header>
+<section class="hero">
 
-    <div class="shape pink"></div>
-    <div class="shape yellow"></div>
-    <div class="shape blue"></div>
+<header>
 
-    <div class="portrait"></div>
+<div class="logo">
+    zakariae
+</div>
 
-    <div class="content">
-      <div class="text">
-        <div class="subtitle">DESIGNER & WEB DEVELOPER</div>
+<nav>
+    <a href="#">ABOUT</a>
+    <a href="#">PROJECTS</a>
+    <a href="#">CONTACT</a>
+</nav>
 
-        <h1>
-          Hi, I am a designer<br>
-          expert in web<br>
-          development
-        </h1>
+</header>
 
-        <p>
-          My mission is to design and develop a website that
-          you and your audience love.
-        </p>
+<div class="shape pink"></div>
+<div class="shape yellow"></div>
+<div class="shape blue"></div>
 
-        <div class="buttons">
-          <a href="#" class="btn">💬 LET'S CHAT ON WHATSAPP</a>
-          <a href="#" class="email">OR SEND ME AN EMAIL</a>
-        </div>
-      </div>
-    </div>
+<div class="content">
 
-    <div class="circle">W</div>
-  </section>
+<div class="text">
+
+<div class="subtitle">
+AI ENGINEER • FLUTTER • LARAVEL • MACHINE LEARNING
+</div>
+
+<h1>
+HI, I AM<br>
+ZAKARIAE<br>
+AI ENGINEER
+</h1>
+
+<p class="description">
+Master's graduate in Artificial Intelligence and Computer Science.
+I specialize in Machine Learning, Deep Learning, LLMs, RAG systems,
+Flutter development, Laravel applications and AI-powered SaaS platforms.
+
+I build intelligent solutions that combine modern software engineering
+with artificial intelligence to help businesses automate processes,
+improve productivity and create innovative digital products.
+</p>
+
+<div class="buttons">
+
+<a href="https://wa.me/212636084654" class="btn">
+💬 LET'S CHAT ON WHATSAPP
+</a>
+
+<a href="mailto:mazoirzakariae@gmail.com" class="email">
+OR SEND ME AN EMAIL
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="portrait">
+    <!-- Replace image path with your generated image -->
+    <img src="ChatGPT Image 9 juin 2026, 01_40_00.png" alt="Zakariae">
+</div>
+
+<div class="circle">
+AI
+</div>
+
+</section>
+
 </body>
 </html>
